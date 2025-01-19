@@ -11,7 +11,7 @@ namespace FiscalApi.Samples.AspNet
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Register FiscalApi services
+            // Registra los servicios de FiscalApi en el contenedor de dependencias.
             builder.Services.AddFiscalApi();
 
             var app = builder.Build();
