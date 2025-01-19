@@ -1,0 +1,6 @@
+@FiscalApi.Samples.AspNet_HostAddress = http://localhost:5181
+
+GET {{FiscalApi.Samples.AspNet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
