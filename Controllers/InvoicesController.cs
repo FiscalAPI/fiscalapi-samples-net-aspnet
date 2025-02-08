@@ -891,9 +891,8 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            // Obtener factura por Id
-
-            var apiResponse = await _fiscalapiClient.Invoices.GetByIdAsync(id);
+            // Obtener factura por Id (true para expandir los objetos relacionados)
+            var apiResponse = await _fiscalapiClient.Invoices.GetByIdAsync(id, true);
 
             if (apiResponse.Succeeded)
                 return Ok(apiResponse.Data);
