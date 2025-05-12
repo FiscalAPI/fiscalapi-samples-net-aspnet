@@ -901,6 +901,25 @@ namespace FiscalApi.Samples.AspNet.Controllers
         } // Obtener factura por Id
 
 
+        //Obtener status de factura por Id
+        [HttpPost("obtener-status/{id}")]
+        public async Task<IActionResult> Status(string id)
+        {
+           
+            var requestModel = new InvoiceStatusRequest
+            {
+                Id = id,
+            };
+
+            var apiResponse = await _fiscalapiClient.Invoices.GetStatusAsync(requestModel);
+
+            if (apiResponse.Succeeded)
+                return Ok(apiResponse.Data);
+
+            return BadRequest(apiResponse);
+        } // Obtener factura por Id
+
+
         // Obtener xml de factura por Id
         [HttpGet("{id}/xml")]
         public async Task<IActionResult> GetXml(string id)
