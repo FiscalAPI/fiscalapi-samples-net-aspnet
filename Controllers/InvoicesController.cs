@@ -410,10 +410,8 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpPost("factura-global-por-valores")]
         public async Task<IActionResult> FacturaGlobalPorValores(CancellationToken ct = default)
         {
-            //Crear factura de pago (complemento pago) por valores
             // https://docs.fiscalapi.com/credentials-info
-
-            // Crear certificados de prueba (EKU9003173C9)
+          
             var sellos = new List<TaxCredential>()
             {
                 new TaxCredential
@@ -537,10 +535,8 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpPost("factura-global-por-referencias")]
         public async Task<IActionResult> FacturaGlobalPorReferencias(CancellationToken ct = default)
         {
-            //Crear factura de pago (complemento pago) por valores
             // https://docs.fiscalapi.com/credentials-info
-
-
+            
             // Emisor
             var issuer = new InvoiceIssuer
             {
