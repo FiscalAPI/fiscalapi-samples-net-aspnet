@@ -1,5 +1,6 @@
 ﻿using Fiscalapi.Abstractions;
 using Fiscalapi.Models;
+using Fiscalapi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -826,6 +827,119 @@ namespace FiscalApi.Samples.AspNet.Controllers
             return BadRequest(apiResponse);
         }
 
+        [HttpPost("factura-con-precios-dinamicos")]
+        public async Task<IActionResult> CrearFacturaConPreciosDinamicos()
+        {
+           
+
+            // Emisor KARLA FUENTE NOLASCO
+            var issuer = new InvoiceIssuer
+            {
+                Id = "3f3478b4-60fd-459e-8bfc-f8239fc96257"
+            };
+
+            // Receptor ESCUELA KEMPER URGATE
+            var recipient = new InvoiceRecipient
+            {
+                Id = "96b46762-d246-4a67-a562-510a25dbafa9"
+            };
+
+            // Crear una lista de productos o servicios de la factura
+            var items = new List<InvoiceItem>()
+            {
+                new InvoiceItem
+                {
+                    Id = "114a4be5-fb65-40b2-a762-ff0c55c6ebfa",
+                    Quantity = 1,
+                    UnitPrice = 102.00m, // Precio dinámico
+                },
+            };
+
+            // Crear la factura 
+            var invoice = new Invoice
+            {
+                VersionCode = "4.0",
+                Series = "SDK-F",
+                Date = DateTime.Now,
+                PaymentFormCode = "01",
+                CurrencyCode = "MXN",
+                TypeCode = "I",
+                ExpeditionZipCode = "42501",
+                Issuer = issuer,
+                Recipient = recipient,
+                Items = items,
+                PaymentMethodCode = "PUE",
+            };
+
+            // Timbrar la factura
+            var apiResponse = await _fiscalapiClient.Invoices.CreateAsync(invoice);
+
+            return Ok(apiResponse);
+        }
+
+        [HttpPost("nota-credito-con-precios-dinamicos")]
+        public async Task<IActionResult> CrearNotaCreditoConPreciosDinamicos()
+        {
+           
+
+            // Emisor KARLA FUENTE NOLASCO
+            var issuer = new InvoiceIssuer
+            {
+                Id = "3f3478b4-60fd-459e-8bfc-f8239fc96257",
+            };
+
+            // Receptor ESCUELA KEMPER URGATE
+            var recipient = new InvoiceRecipient
+            {
+                Id = "96b46762-d246-4a67-a562-510a25dbafa9"
+            };
+
+            // Agregar facturas relacionadas
+            var relatedInvoices = new List<RelatedInvoice>()
+            {
+                new RelatedInvoice
+                {
+                    Uuid = "5FB2822E-396D-4725-8521-CDC4BDD20CCF",
+                    RelationshipTypeCode = "01"
+                }
+            };
+
+            // Crear una lista de productos o servicios de la factura
+            var items = new List<InvoiceItem>()
+            {
+                new InvoiceItem
+                {
+                    Id = "114a4be5-fb65-40b2-a762-ff0c55c6ebfa",
+                    Quantity = 0.5m, // 50% de descuento
+                    UnitPrice = 101.00m, // Precio dinámico
+                },
+            };
+
+            // Crear la factura de egreso (nota de crédito)
+            var creditNote = new Invoice
+            {
+                VersionCode = "4.0",
+                Series = "CN",
+                Date = DateTime.Now,
+                PaymentFormCode = "03",
+                PaymentConditions = "Contado",
+                CurrencyCode = "MXN",
+                TypeCode = "E", // nota de crédito
+                ExpeditionZipCode = "01160",
+                Issuer = issuer,
+                Recipient = recipient,
+                Items = items,
+                PaymentMethodCode = "PUE",
+                ExchangeRate = 1,
+                ExportCode = "01",
+                RelatedInvoices = relatedInvoices
+            };
+
+            // Timbrar la factura de egreso
+            var apiResponse = await _fiscalapiClient.Invoices.CreateAsync(creditNote);
+
+            return Ok(apiResponse);
+        }
 
         // Crear nota credito por referencias (enviando solo lod ids de los objetos en la solicitud)
         [HttpPost("nota-credito-por-referencia")]
