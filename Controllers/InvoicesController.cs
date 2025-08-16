@@ -7,6 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiscalApi.Samples.AspNet.Controllers
 {
+    /// <summary>
+    /// NOTA IMPORTANTE: Las rutas (paths) definidas en esta aplicación de ejemplo no necesariamente
+    /// coinciden con las rutas reales de la API de FiscalApi. Los paths de esta aplicación son
+    /// únicamente para propósitos de demostración y ejemplo.
+    /// 
+    /// Para consultar las rutas y endpoints oficiales de FiscalApi, consulte la documentación 
+    /// oficial en: https://docs.fiscalapi.com/
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class InvoicesController : ControllerBase
@@ -412,7 +420,7 @@ namespace FiscalApi.Samples.AspNet.Controllers
         public async Task<IActionResult> FacturaGlobalPorValores(CancellationToken ct = default)
         {
             // https://docs.fiscalapi.com/credentials-info
-          
+
             var sellos = new List<TaxCredential>()
             {
                 new TaxCredential
@@ -537,7 +545,7 @@ namespace FiscalApi.Samples.AspNet.Controllers
         public async Task<IActionResult> FacturaGlobalPorReferencias(CancellationToken ct = default)
         {
             // https://docs.fiscalapi.com/credentials-info
-            
+
             // Emisor
             var issuer = new InvoiceIssuer
             {
@@ -826,8 +834,6 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpPost("factura-con-precios-dinamicos")]
         public async Task<IActionResult> CrearFacturaConPreciosDinamicos()
         {
-           
-
             // Emisor KARLA FUENTE NOLASCO
             var issuer = new InvoiceIssuer
             {
@@ -876,8 +882,6 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpPost("nota-credito-con-precios-dinamicos")]
         public async Task<IActionResult> CrearNotaCreditoConPreciosDinamicos()
         {
-           
-
             // Emisor KARLA FUENTE NOLASCO
             var issuer = new InvoiceIssuer
             {

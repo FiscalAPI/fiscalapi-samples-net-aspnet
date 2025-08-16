@@ -5,8 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace FiscalApi.Samples.AspNet.Controllers
 {
     /// <summary>
-    /// Controlador para manejar personas (emisor, receptor, cliente, usuario, etc)
-    /// En fiscalapi, una persona es un objeto que representa a un usuario del sistema, puede ser un emisor, receptor, cliente, usuario. Es el mismo objeto y mismo recurso, solo cambia su connotación (role) dependiendo del contexto.
+    /// NOTA IMPORTANTE: Las rutas (paths) definidas en esta aplicación de ejemplo no necesariamente
+    /// coinciden con las rutas reales de la API de FiscalApi. Los paths de esta aplicación son
+    /// únicamente para propósitos de demostración y ejemplo.
+    /// 
+    /// Para consultar las rutas y endpoints oficiales de FiscalApi, consulte la documentación 
+    /// oficial en: https://docs.fiscalapi.com/
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]

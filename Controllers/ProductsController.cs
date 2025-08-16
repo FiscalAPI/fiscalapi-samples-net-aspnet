@@ -4,6 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiscalApi.Samples.AspNet.Controllers
 {
+    /// <summary>
+    /// NOTA IMPORTANTE: Las rutas (paths) definidas en esta aplicación de ejemplo no necesariamente
+    /// coinciden con las rutas reales de la API de FiscalApi. Los paths de esta aplicación son
+    /// únicamente para propósitos de demostración y ejemplo.
+    /// 
+    /// Para consultar las rutas y endpoints oficiales de FiscalApi, consulte la documentación 
+    /// oficial en: https://docs.fiscalapi.com/
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -106,7 +114,6 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpPut("actualizar-impuestos/{id}")]
         public async Task<IActionResult> ActualizarImpuestosProducto(string id)
         {
-         
             var request = new Product
             {
                 Id = id,
@@ -115,33 +122,35 @@ namespace FiscalApi.Samples.AspNet.Controllers
                 SatUnitMeasurementId = "E48",
                 SatTaxObjectId = "02",
                 SatProductCodeId = "84111500",
-                ProductTaxes = new List<ProductTax> // Al incluir esta lista, se reemplazan los impuestos existentes por esta lista.
-                {
-                    //Traslado IVA 16%
-                    new ProductTax
-                    {
-                        Rate = 0.16m,
-                        TaxId = "002",
-                        TaxFlagId = "T",
-                        TaxTypeId = "Tasa",
-                    },
-                    // Retención de ISR 10%
-                    new ProductTax
-                    {
-                        Rate = 0.10m,
-                        TaxId = "001",
-                        TaxFlagId = "R",
-                        TaxTypeId = "Tasa",
-                    },
-                    // Retención de IVA 2/3 partes
-                    new ProductTax
-                    {
-                        Rate = 0.10666666666m,
-                        TaxId = "002",
-                        TaxFlagId = "R",
-                        TaxTypeId = "Tasa",
-                    }
-                }
+                ProductTaxes =
+                    new
+                        List<ProductTax> // Al incluir esta lista, se reemplazan los impuestos existentes por esta lista.
+                        {
+                            //Traslado IVA 16%
+                            new ProductTax
+                            {
+                                Rate = 0.16m,
+                                TaxId = "002",
+                                TaxFlagId = "T",
+                                TaxTypeId = "Tasa",
+                            },
+                            // Retención de ISR 10%
+                            new ProductTax
+                            {
+                                Rate = 0.10m,
+                                TaxId = "001",
+                                TaxFlagId = "R",
+                                TaxTypeId = "Tasa",
+                            },
+                            // Retención de IVA 2/3 partes
+                            new ProductTax
+                            {
+                                Rate = 0.10666666666m,
+                                TaxId = "002",
+                                TaxFlagId = "R",
+                                TaxTypeId = "Tasa",
+                            }
+                        }
             };
 
             var apiResponse = await _fiscalApiClient.Products.UpdateAsync(id, request);

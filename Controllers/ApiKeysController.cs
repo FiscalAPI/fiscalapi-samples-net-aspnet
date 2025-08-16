@@ -4,6 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiscalApi.Samples.AspNet.Controllers
 {
+    /// <summary>
+    /// NOTA IMPORTANTE: Las rutas (paths) definidas en esta aplicación de ejemplo no necesariamente
+    /// coinciden con las rutas reales de la API de FiscalApi. Los paths de esta aplicación son
+    /// únicamente para propósitos de demostración y ejemplo.
+    /// 
+    /// Para consultar las rutas y endpoints oficiales de FiscalApi, consulte la documentación 
+    /// oficial en: https://docs.fiscalapi.com/
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ApiKeysController : ControllerBase
