@@ -49,7 +49,7 @@ namespace FiscalApi.Samples.AspNet.Controllers
         [HttpGet("{catalogName}")]
         public async Task<IActionResult> GetCatalogByName(string catalogName)
         {
-            var apiResponse = await _fiscalApiClient.DownloadCatalogs.GetRecordByNameAsync(catalogName);
+            var apiResponse = await _fiscalApiClient.DownloadCatalogs.ListCatalogAsync(catalogName);
 
             if (apiResponse.Succeeded)
                 return Ok(apiResponse.Data);
