@@ -212,6 +212,20 @@ namespace FiscalApi.Samples.AspNet.Controllers
             return BadRequest(apiResponse);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> DownloadSatResponse(DateTime createdAt)
+        {
+            var apiResponse = await _fiscalApiClient.DownloadRequests.SearchAsync(createdAt);
+
+            if (apiResponse.Succeeded)
+            {
+                return Ok(apiResponse);
+            }
+
+            return BadRequest(apiResponse);
+        }
+
+
         /// <summary>
         /// Método auxiliar para escribir archivos en disco.
         /// Convierte el archivo Base64 a bytes y lo guarda en C:\facturas.
